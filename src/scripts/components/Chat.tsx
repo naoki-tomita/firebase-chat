@@ -1,31 +1,12 @@
 import * as React from "react";
-
-import { app, User } from "firebase";
 import styled from "styled-components";
+import { app, User } from "firebase";
 
-const MyMessage = (props: {
-  name: string;
-  message: string;
-}) => {
-  return (
-    <>
-      <div>{props.name}</div>
-      <div>{props.message}</div>
-    </>
-  );
-}
+import { MessageType } from "../types/MessageType";
+import { YourMessage, MyMessage } from "./Messsage";
+import { MessageSender, ImageSender } from "./Sender";
 
-const Message = (props: {
-  name: string;
-  message: string;
-}) => {
-  return (
-    <>
-      <div>{props.name}</div>
-      <div>{props.message}</div>
-    </>
-  );
-}
+const Name = styled.div``;
 
 interface Props {
   user: User;
@@ -35,15 +16,20 @@ interface Props {
 interface State {
   messages: Array<{
     name: string;
-    message: string;
+    type: MessageType;
+    data: string;
     userId: string;
   }>;
-  message: string;
 }
 
-const Name = styled.div``;
-const MessageInput = styled.input``;
-const MessageSend = styled.button``;
+const Container = styled.div`
+  padding: 20px 10px;
+  max-width: 450px;
+  margin: 15px auto;
+  text-align: right;
+  font-size: 14px;
+  background: #7da4cd;
+`;
 
 export class Chat extends React.Component<Props, State> {
   componentDidMount() {
@@ -61,49 +47,44 @@ export class Chat extends React.Component<Props, State> {
   }
 
   render() {
-    const { user } = this.props;
-    const { messages = [], message = "" } = this.state || {};
+    const { user, app } = this.props;
+    const { messages = [] } = this.state || {};
 
     return (
       <>
         <Name>{user.displayName}</Name>
-        {messages.map(this.renderMessage)}
-        <MessageInput value={message} onChange={this.onMessageChange} />
-        <MessageSend onClick={this.onSendClick}>Send</MessageSend>
+        <Container>
+          {messages.map(this.renderMessage)}
+        </Container>
+        <MessageSender app={app} user={user}/>
+        <ImageSender app={app} user={user}/>
       </>
     );
   }
 
   renderMessage = (message: {
     name: string;
-    message: string;
+    data: string;
+    type: MessageType;
     userId: string;
   }, i: number) => {
     if (this.props.user.uid === message.userId) {
-      return <MyMessage key={i} name={message.name} message={message.message} />
+      return (
+        <MyMessage
+          key={i}
+          name={message.name}
+          type={message.type}
+          data={message.data}
+        />
+      );
     }
-    return <Message key={i} name={message.name} message={message.message} />
-  }
-
-  onMessageChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-    this.setState({
-      message: e.target.value,
-    });
-  }
-
-  onSendClick = () => {
-    const { user } = this.props;
-    const { message = "" } = this.state || {};
-    if (!message) {
-      return;
-    }
-    this.props.app.database().ref("message").push({
-      name: user.displayName,
-      userId: user.uid,
-      message,
-    });
-    this.setState({
-      message: "",
-    });
+    return (
+      <YourMessage
+        key={i}
+        name={message.name}
+        type={message.type}
+        data={message.data}
+      />
+    );
   }
 }
