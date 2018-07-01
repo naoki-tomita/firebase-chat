@@ -56,7 +56,8 @@ export class MessageSender extends Sender<{}, MSState> {
     this.send({
       type: "message",
       data: message,
-    })
+    });
+    this.setState({ message: "" });
   }
 }
 
