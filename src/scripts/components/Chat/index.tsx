@@ -1,12 +1,10 @@
 import * as React from "react";
-import styled from "styled-components";
 import { app, User } from "firebase";
 
-import { MessageType } from "../types/MessageType";
-import { YourMessage, MyMessage } from "./Messsage";
-import { MessageSender, ImageSender } from "./Sender";
-
-const Name = styled.div``;
+import { SomeoneMessage, MyMessage } from "../Messsage";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
+import { Message } from "../../types/Message";
 
 interface Props {
   user: User;
@@ -14,22 +12,9 @@ interface Props {
 }
 
 interface State {
-  messages: Array<{
-    name: string;
-    type: MessageType;
-    data: string;
-    userId: string;
-  }>;
+  messages: Message[];
 }
 
-const Container = styled.div`
-  padding: 20px 10px;
-  max-width: 450px;
-  margin: 15px auto;
-  text-align: right;
-  font-size: 14px;
-  background: #7da4cd;
-`;
 
 export class Chat extends React.Component<Props, State> {
   componentDidMount() {
@@ -52,22 +37,14 @@ export class Chat extends React.Component<Props, State> {
 
     return (
       <>
-        <Name>{user.displayName}</Name>
-        <Container>
+        <Header userName={user.displayName || "anonymous"}/>
           {messages.map(this.renderMessage)}
-        </Container>
-        <MessageSender app={app} user={user}/>
-        <ImageSender app={app} user={user}/>
+        <Footer app={app} user={user} />
       </>
     );
   }
 
-  renderMessage = (message: {
-    name: string;
-    data: string;
-    type: MessageType;
-    userId: string;
-  }, i: number) => {
+  renderMessage = (message: Message, i: number) => {
     if (this.props.user.uid === message.userId) {
       return (
         <MyMessage
@@ -79,7 +56,7 @@ export class Chat extends React.Component<Props, State> {
       );
     }
     return (
-      <YourMessage
+      <SomeoneMessage
         key={i}
         name={message.name}
         type={message.type}

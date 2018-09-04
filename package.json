@@ -1,20 +1,11 @@
 {
   "dependencies": {
-    "@types/firebase": "^3.2.1",
-    "@types/react": "^16.4.5",
-    "@types/react-dom": "^16.0.6",
-    "@types/uuid": "^3.4.3",
-    "@types/webpack": "^4.4.4",
-    "firebase": "^5.2.0",
-    "npm-run-all": "^4.1.3",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "styled-components": "^3.3.3",
-    "ts-loader": "^4.4.2",
-    "ts-node": "^7.0.0",
-    "typescript": "^2.9.2",
-    "uuid": "^3.3.2",
-    "webpack": "^4.14.0"
+    "firebase": "^5.4.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "styled-components": "^3.4.5",
+    "typescript": "^3.0.3",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "clean": "rm -r dist",
@@ -23,7 +14,16 @@
     "build:app": "cp -r src/apps/. dist"
   },
   "devDependencies": {
-    "webpack-command": "^0.3.1"
+    "@types/firebase": "^3.2.1",
+    "@types/react": "^16.4.13",
+    "@types/react-dom": "^16.0.7",
+    "@types/uuid": "^3.4.4",
+    "@types/webpack": "^4.4.11",
+    "npm-run-all": "^4.1.3",
+    "ts-loader": "^5.0.0",
+    "ts-node": "^7.0.1",
+    "webpack-command": "^0.4.1",
+    "webpack": "^4.17.2"
   },
   "name": "firebase-chat",
   "version": "1.0.0",

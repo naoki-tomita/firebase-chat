@@ -1,15 +1,7 @@
-import * as React from "react";
+import * as React from "react"
 import styled from "styled-components";
 
 import { MessageType } from "../types/MessageType";
-
-interface Message {
-  (props: {
-    name: string;
-    type: MessageType;
-    data: string;
-  }): JSX.Element;
-}
 
 const MyContainer = styled.div`
   margin: 10px 0;
@@ -61,7 +53,13 @@ const MyImage = styled.img`
   }
 `;
 
-export const MyMessage: Message = props => {
+interface Props {
+  name: string;
+  type: MessageType;
+  data: string;
+}
+
+export const MyMessage: React.StatelessComponent<Props> = props => {
   return (
     <MyContainer>
       {
@@ -78,7 +76,12 @@ const Balloon = styled.div`
   margin: 10px 0;
   overflow: hidden;
 `;
-// const BalloonIcon = styled.img``;
+
+// const BalloonIcon = styled.div`
+//   float: left;
+//   margin-right: -50px;
+//   width: 40px;
+// `;
 
 const BalloonOuter = styled.div`
   width: 100%;
@@ -134,7 +137,7 @@ const BalloonInner = styled.p`
   padding: 0;
 `;
 
-export const YourMessage: Message = props => {
+export const SomeoneMessage: React.StatelessComponent<Props> = props => {
   return (
     <Balloon>
       <BalloonOuter>

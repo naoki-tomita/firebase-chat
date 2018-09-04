@@ -1,8 +1,8 @@
 import * as React from "react";
 import { render } from "react-dom";
+import { initializeApp } from "firebase";
 
 import { App } from "./components/App";
-import { initializeApp } from "firebase";
 
 const app = initializeApp({
   apiKey: "AIzaSyBySiXZAx6Ueu4VDwkfbBh759etyrxIsz4",

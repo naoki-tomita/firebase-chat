@@ -3,7 +3,7 @@ import styled from "styled-components";
 import * as uuid from "uuid/v4";
 import { app, User } from "firebase";
 
-import { MessageType } from "../types/MessageType";
+import { MessageType } from "../../../types/MessageType";
 
 const MessageInput = styled.input``;
 const MessageSend = styled.button``;
@@ -18,12 +18,17 @@ abstract class Sender<P, S> extends React.Component<SProps & P, S> {
     type: MessageType;
     data: string
   }) {
-    const { user, app } = this.props;
-    app.database().ref("message").push({
-      name: user.displayName,
-      userId: user.uid,
-      type,
-      data,
+    return new Promise((ok, ng) => {
+      const { user, app } = this.props;
+      app.database().ref("message").push({
+        name: user.displayName,
+        userId: user.uid,
+        type,
+        data,
+      }, error => {
+        if (error) ng(error);
+        else ok();
+      });
     });
   }
 }

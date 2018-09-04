@@ -5,7 +5,7 @@ import { Spinner } from "./Spinner";
 
 interface Props {
   app: app.App;
-  onLogin: (user: User) => void;
+  user: User;
 }
 
 interface State {
@@ -14,25 +14,12 @@ interface State {
 }
 
 const Input = styled.input``;
-const LoginButton = styled.button``;
+const ChangeButton = styled.button``;
 
-export class Login extends React.Component<Props, State> {
+export class Config extends React.Component<Props, State> {
   constructor(p: Props, c: any) {
     super(p, c);
     this.state = { name: "", user: null };
-  }
-  componentDidMount() {
-    const { app } = this.props;
-    app.auth().onAuthStateChanged(user => {
-      if (user) {
-        if (user.displayName) {
-          this.props.onLogin(user);
-        } else {
-          this.setState({ user });
-        }
-      }
-    });
-    this.login();
   }
 
   render() {
@@ -43,15 +30,10 @@ export class Login extends React.Component<Props, State> {
       return (
         <>
           <Input value={name} onChange={this.onNameChange} />
-          <LoginButton onClick={this.onLoginClick} >Login</LoginButton>
+          <ChangeButton onClick={this.onChangeClick} >Login</ChangeButton>
         </>
       );
     }
-  }
-
-  async login() {
-    const { app } = this.props;
-    app.auth().signInAnonymously();
   }
 
   onNameChange: React.ChangeEventHandler<HTMLInputElement> = e => {
@@ -60,14 +42,13 @@ export class Login extends React.Component<Props, State> {
     });
   }
 
-  onLoginClick = async () => {
+  onChangeClick = async () => {
     const { name = "", user = null } = this.state || {};
     if (user && name) {
       await user.updateProfile({
         displayName: name,
         photoURL: "http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/128/User-icon.png",
       });
-      this.props.onLogin(user);
     }
   }
 }
