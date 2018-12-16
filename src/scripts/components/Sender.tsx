@@ -11,7 +11,8 @@ const MessageSenderContainer = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  width: 450px;
+  max-width: 450px;
+  width: 100%;
   height: 48px;
   background-color: #AAA;
   display: flex;

@@ -84,6 +84,14 @@ const Balloon = styled.div`
   width: 100%;
   margin: 10px 0;
   overflow: hidden;
+  padding: 10px 0;
+
+  &:first-child {
+    padding-top: 32px;
+  }
+  &:last-child {
+    padding-bottom: 48px;
+  }
 `;
 // const BalloonIcon = styled.img``;
 
