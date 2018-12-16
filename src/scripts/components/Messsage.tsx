@@ -13,13 +13,6 @@ interface Message {
 
 const MyContainer = styled.div`
   padding: 10px 0;
-
-  &:first-child {
-    padding-top: 32px;
-  }
-  &:last-child {
-    padding-bottom: 48px;
-  }
 `;
 
 const MyText = styled.div`
@@ -85,13 +78,6 @@ const Balloon = styled.div`
   margin: 10px 0;
   overflow: hidden;
   padding: 10px 0;
-
-  &:first-child {
-    padding-top: 32px;
-  }
-  &:last-child {
-    padding-bottom: 48px;
-  }
 `;
 // const BalloonIcon = styled.img``;
 

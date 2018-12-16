@@ -22,11 +22,13 @@ const MessageSenderContainer = styled.div`
 
 const MessageInput = styled.input`
   border-radius: 100px;
-  font-size: 14px;
   margin: 5px;
   flex: 1;
   border: none;
+  font-size: 16px;
+  transform: scale(14/16);
 `;
+
 const MessageSend = styled.a`
   position: relative;
   display: inline-block;

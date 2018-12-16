@@ -1,8 +1,15 @@
 import * as React from "react";
+import { createGlobalStyle } from "styled-components";
 
 import { app, User } from "firebase";
 import { Login } from "./Login";
 import { Chat } from "./Chat";
+
+const Global = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+`;
 
 interface Props {
   app: app.App;
@@ -22,9 +29,12 @@ export class App extends React.Component<Props, State> {
     const { user = null } = this.state || {};
     const { app } = this.props;
     return (
-      user
+      <>
+      <Global />
+      {user
         ? <Chat app={app} user={user} />
-        : <Login app={app} onLogin={this.onLogin} />
+        : <Login app={app} onLogin={this.onLogin} />}
+      </>
     );
   }
 

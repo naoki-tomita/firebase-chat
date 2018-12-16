@@ -12,7 +12,8 @@ const Name = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  width: 450px;
+  max-width: 450px;
+  width: 100%;
   height: 32px;
   background-color: #AAA;
   text-align: center;
@@ -46,6 +47,7 @@ const MessageContainer = styled.div`
   min-height: 100%;
   text-align: right;
   background: #7da4cd;
+  padding: 38px 4px 48px 4px;
 `;
 
 export class Chat extends React.Component<Props, State> {
