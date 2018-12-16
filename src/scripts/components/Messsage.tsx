@@ -12,7 +12,14 @@ interface Message {
 }
 
 const MyContainer = styled.div`
-  margin: 10px 0;
+  padding: 10px 0;
+
+  &:first-child {
+    padding-top: 32px;
+  }
+  &:last-child {
+    padding-bottom: 48px;
+  }
 `;
 
 const MyText = styled.div`

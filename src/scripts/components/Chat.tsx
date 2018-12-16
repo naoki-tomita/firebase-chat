@@ -4,9 +4,23 @@ import { app, User } from "firebase";
 
 import { MessageType } from "../types/MessageType";
 import { YourMessage, MyMessage } from "./Messsage";
-import { MessageSender, ImageSender } from "./Sender";
+import { MessageSender } from "./Sender";
 
-const Name = styled.div``;
+const Name = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 450px;
+  height: 32px;
+  background-color: #AAA;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1;
+`;
 
 interface Props {
   user: User;
@@ -23,11 +37,14 @@ interface State {
 }
 
 const Container = styled.div`
-  padding: 20px 10px;
   max-width: 450px;
-  margin: 15px auto;
-  text-align: right;
   font-size: 14px;
+  margin: auto;
+`;
+
+const MessageContainer = styled.div`
+  min-height: 100%;
+  text-align: right;
   background: #7da4cd;
 `;
 
@@ -51,14 +68,13 @@ export class Chat extends React.Component<Props, State> {
     const { messages = [] } = this.state || {};
 
     return (
-      <>
+      <Container>
         <Name>{user.displayName}</Name>
-        <Container>
+        <MessageContainer>
           {messages.map(this.renderMessage)}
-        </Container>
+        </MessageContainer>
         <MessageSender app={app} user={user}/>
-        <ImageSender app={app} user={user}/>
-      </>
+      </Container>
     );
   }
 
